@@ -13,9 +13,13 @@ export default function RegistrosSection() {
       const agrupados = {};
 
       Object.values(data).forEach((d) => {
-        if (!d.timestamp) return;
+        if (!d.timestamp || typeof d.uvi !== "number") return;
 
-        const date = new Date(d.timestamp);
+        // 🔥 CORRECCIÓN CLAVE
+        const date = new Date(d.timestamp * 1000);
+
+        // Ignorar registros antiguos (malos)
+        if (date.getFullYear() < 2024) return;
 
         const fecha = date.toLocaleDateString("es-PE");
         const hora = date.toLocaleTimeString("es-PE", {
