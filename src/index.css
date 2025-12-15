@@ -66,3 +66,10 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+html, body, #root {
+  min-height: 100%;
+  background-color: #0B1220; /* azul oscuro uniforme */
+  color: #E5E7EB;
+  margin: 0;
+  padding: 0;
+}

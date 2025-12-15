@@ -1,0 +1,251 @@
+/* =====================================================
+   VARIABLES DE TEMA
+===================================================== */
+
+
+/* ----- TEMA OSCURO ----- */
+:root {
+  --bg: #0b1220;
+  --card: #121a2b;
+  --primary: #3b82f6;
+  --text: #e5e7eb;
+  --border: #1f2a44;
+
+  --sidebar-bg: linear-gradient(180deg, #0b1220, #0e1628);
+  --sidebar-text: #e5e7eb;
+  --sidebar-hover: rgba(59, 130, 246, 0.15);
+}
+
+/* =====================================================
+   RESET GLOBAL
+===================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+}
+
+/* =====================================================
+   DASHBOARD LAYOUT (APP REAL)
+===================================================== */
+
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  background: var(--bg);
+}
+
+.dashboard-content {
+  flex: 1;
+  width: 100%;
+  padding: 32px;
+  overflow-x: hidden;
+  background: var(--bg);
+}
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.sidebar {
+  width: 260px;
+  background: var(--sidebar-bg);
+  padding: 24px 16px;
+  color: var(--sidebar-text);
+  border-right: 1px solid var(--border);
+  transition: background 0.3s ease;
+}
+
+/* ----- TÍTULO ----- */
+.sidebar-title {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.sidebar-title-uv {
+  font-size: 1.6rem;
+  color: var(--primary);
+  letter-spacing: 1px;
+}
+
+.sidebar-title-text {
+  font-size: 1.1rem;
+  color: var(--sidebar-text);
+  opacity: 0.85;
+}
+
+.sidebar-title-line {
+  width: 40px;
+  height: 3px;
+  background: var(--primary);
+  border-radius: 2px;
+  margin-bottom: 32px;
+}
+
+/* ----- ITEMS ----- */
+.sidebar-item {
+  position: relative;
+  padding: 14px 16px 14px 20px;
+  margin-bottom: 16px;
+  cursor: pointer;
+  color: var(--sidebar-text);
+  font-weight: 500;
+  transition: color 0.3s, background 0.3s;
+}
+
+.sidebar-item:hover {
+  background: var(--sidebar-hover);
+  color: var(--primary);
+}
+
+/* LINEA IZQUIERDA ANIMADA */
+.sidebar-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 3px;
+  height: 0%;
+  background: var(--primary);
+  border-radius: 2px;
+  transform: translateY(-50%);
+  transition: height 0.35s ease;
+}
+
+.sidebar-item.active {
+  color: var(--primary);
+}
+
+.sidebar-item.active::before {
+  height: 100%;
+}
+
+/* =====================================================
+   CONTENEDORES DE SECCIÓN (LAYOUT REAL)
+===================================================== */
+
+.section-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 100%;
+  gap: 24px;
+}
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 100%;
+  gap: 32px;
+}
+
+.records-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 16px;
+}
+
+/* =====================================================
+   UVI (HERO)
+===================================================== */
+
+.uvi-hero {
+  display: flex;
+  width: 100%;
+  min-height: 300px;
+  justify-content: center;
+  align-items: center;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.uvi-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.uvi-valor {
+  font-size: clamp(4rem, 8vw, 6rem);
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+/* =====================================================
+   CARD (SOLO VISUAL)
+===================================================== */
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  width: 100%;
+}
+
+/* =====================================================
+   REGISTROS
+===================================================== */
+
+details {
+  margin-bottom: 12px;
+}
+
+summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 900px) {
+  .dashboard {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sidebar-item {
+    margin-bottom: 0;
+  }
+
+  .dashboard-content {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .uvi-valor {
+    font-size: 3.2rem;
+  }
+}
