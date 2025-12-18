@@ -1,9 +1,7 @@
 /* =====================================================
-   VARIABLES DE TEMA
+   VARIABLES DE TEMA (SOLO OSCURO)
 ===================================================== */
 
-
-/* ----- TEMA OSCURO ----- */
 :root {
   --bg: #0b1220;
   --card: #121a2b;
@@ -28,20 +26,22 @@ html,
 body,
 #root {
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   margin: 0;
-  background: var(--bg);
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: "Inter", system-ui, sans-serif;
 }
 
 /* =====================================================
-   DASHBOARD LAYOUT (APP REAL)
+   DASHBOARD LAYOUT
 ===================================================== */
 
 .dashboard {
   display: flex;
-  min-height: 100vh;
   width: 100%;
-  background: var(--bg);
+  min-height: 100vh;
+  background-color: var(--bg);
 }
 
 .dashboard-content {
@@ -49,7 +49,7 @@ body,
   width: 100%;
   padding: 32px;
   overflow-x: hidden;
-  background: var(--bg);
+  background-color: var(--bg);
 }
 
 /* =====================================================
@@ -60,49 +60,40 @@ body,
   width: 260px;
   background: var(--sidebar-bg);
   padding: 24px 16px;
-  color: var(--sidebar-text);
   border-right: 1px solid var(--border);
-  transition: background 0.3s ease;
 }
 
-/* ----- TÍTULO ----- */
 .sidebar-title {
   display: flex;
   align-items: baseline;
   gap: 6px;
   font-weight: 700;
-  margin-bottom: 6px;
 }
 
 .sidebar-title-uv {
   font-size: 1.6rem;
   color: var(--primary);
-  letter-spacing: 1px;
 }
 
 .sidebar-title-text {
   font-size: 1.1rem;
-  color: var(--sidebar-text);
   opacity: 0.85;
 }
 
 .sidebar-title-line {
-  width: 40px;
+  width: 42px;
   height: 3px;
   background: var(--primary);
   border-radius: 2px;
-  margin-bottom: 32px;
+  margin: 10px 0 32px;
 }
 
-/* ----- ITEMS ----- */
 .sidebar-item {
   position: relative;
   padding: 14px 16px 14px 20px;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   cursor: pointer;
-  color: var(--sidebar-text);
-  font-weight: 500;
-  transition: color 0.3s, background 0.3s;
+  transition: background 0.25s ease, color 0.25s ease;
 }
 
 .sidebar-item:hover {
@@ -110,18 +101,16 @@ body,
   color: var(--primary);
 }
 
-/* LINEA IZQUIERDA ANIMADA */
 .sidebar-item::before {
   content: "";
   position: absolute;
   left: 0;
   top: 50%;
   width: 3px;
-  height: 0%;
+  height: 0;
   background: var(--primary);
-  border-radius: 2px;
   transform: translateY(-50%);
-  transition: height 0.35s ease;
+  transition: height 0.3s ease;
 }
 
 .sidebar-item.active {
@@ -133,93 +122,194 @@ body,
 }
 
 /* =====================================================
-   CONTENEDORES DE SECCIÓN (LAYOUT REAL)
+   SECCIONES (SELLADO DE FONDO)
 ===================================================== */
 
-.section-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  width: 100%;
-  gap: 24px;
-}
-
-.charts-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  width: 100%;
-  gap: 32px;
-}
-
+.section-grid,
+.charts-grid,
 .records-container {
-  display: flex;
-  flex-direction: column;
   width: 100%;
-  gap: 16px;
+  display: grid;
+  gap: 24px;
+  background-color: var(--bg); /* 🔥 CLAVE */
 }
 
 /* =====================================================
-   UVI (HERO)
+   UVI ACTUAL
 ===================================================== */
 
 .uvi-hero {
+  min-height: 280px;
   display: flex;
-  width: 100%;
-  min-height: 300px;
   justify-content: center;
   align-items: center;
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: 18px;
 }
 
 .uvi-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  background: var(--card);      /* 🔥 evita fondo negro */
+  padding: 24px;
+  border-radius: 14px;
   text-align: center;
 }
 
 .uvi-valor {
-  font-size: clamp(4rem, 8vw, 6rem);
+  font-size: clamp(3.5rem, 7vw, 6rem);
   font-weight: 800;
   letter-spacing: 2px;
+  color: var(--primary);
+  text-shadow: 0 0 22px rgba(59, 130, 246, 0.35);
 }
 
 /* =====================================================
-   CARD (SOLO VISUAL)
+   CARDS GENERALES
 ===================================================== */
 
 .card {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: 16px;
   padding: 20px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
-  width: 100%;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  animation: fadeUp 0.45s ease forwards;
 }
 
 /* =====================================================
-   REGISTROS
+   REGISTROS (DETAILS / SUMMARY FIX)
 ===================================================== */
 
-details {
-  margin-bottom: 12px;
+details.card {
+  background: var(--card);
 }
 
 summary {
+  padding: 10px 12px;
+  font-weight: 600;
   cursor: pointer;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 10px;
+}
+
+/* =====================================================
+   TABLAS DE REGISTROS
+===================================================== */
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.records-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  margin-top: 12px;
+  font-size: 0.9rem;
+}
+
+.records-table thead {
+  background: rgba(59, 130, 246, 0.08);
+}
+
+.records-table th,
+.records-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Ancho de columnas */
+
+.records-table th:nth-child(1),
+.records-table td:nth-child(1) {
+  width: 35%;
+}
+
+.records-table th:nth-child(2),
+.records-table td:nth-child(2) {
+  width: 25%;
+  text-align: right;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.records-table th:nth-child(3),
+.records-table td:nth-child(3) {
+  width: 40%;
+  text-align: center;
+}
+
+.records-table tr:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* =====================================================
+   BOTONES DE ORDEN
+===================================================== */
+
+.sort-btn {
+  margin-left: 10px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  background: rgba(59, 130, 246, 0.08);
+  color: var(--primary);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sort-btn:hover {
+  background: rgba(59, 130, 246, 0.18);
+  transform: translateY(-1px);
+}
+
+.sort-btn.active {
+  background: rgba(59, 130, 246, 0.25);
+}
+
+/* =====================================================
+   BADGE PROMEDIO
+===================================================== */
+
+.avg-badge {
+  margin-left: 14px;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  border-radius: 999px;
+  background: rgba(59, 130, 246, 0.15);
+  color: var(--primary);
   font-weight: 600;
 }
 
-body {
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-}
+/* =====================================================
+   COLORES POR NIVEL UVI
+===================================================== */
 
+.nivel-bajo { color: #22c55e; }
+.nivel-moderado { color: #facc15; }
+.nivel-alto { color: #fb923c; }
+.nivel-muy-alto,
+.nivel-extremo { color: #ef4444; }
 
 /* =====================================================
-   RESPONSIVE
+   ANIMACIONES
+===================================================== */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =====================================================
+   RESPONSIVE (NO TOCADO)
 ===================================================== */
 
 @media (max-width: 900px) {
@@ -230,22 +320,44 @@ body {
   .sidebar {
     width: 100%;
     display: flex;
-    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
     border-right: none;
     border-bottom: 1px solid var(--border);
   }
 
-  .sidebar-item {
-    margin-bottom: 0;
+  .sidebar-title-line {
+    display: none;
   }
 
   .dashboard-content {
-    padding: 20px;
+    padding: 16px;
   }
 }
 
 @media (max-width: 600px) {
-  .uvi-valor {
-    font-size: 3.2rem;
+  .records-table {
+    font-size: 0.82rem;
   }
+
+  .records-table th:nth-child(1),
+  .records-table td:nth-child(1) {
+    width: 40%;
+  }
+
+  .records-table th:nth-child(2),
+  .records-table td:nth-child(2) {
+    width: 30%;
+  }
+
+  .records-table th:nth-child(3),
+  .records-table td:nth-child(3) {
+    width: 30%;
+  }
+}
+
+.chart-wrapper {
+  position: relative;
+  width: 100%;
+  height: 320px;   /* 🔥 controla el alto */
 }
